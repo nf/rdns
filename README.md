@@ -1,7 +1,8 @@
 # rdns
 
-`rdns` is a DNS server that serves PTR and AAAA records for an IPv6 subnet.
-It also serves the corresponding authoritative NS records.
+`rdns` is provides reverse DNS for IPv6 networks. It is a DNS server that
+serves PTR and AAAA records for an IPv6 subnet, and the corresponding
+authoritative NS records.
 
 ## Setup
 
@@ -61,6 +62,16 @@ $ dig -t NS 0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa.
 ;; AUTHORITY SECTION:
 0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. 3600 IN NS ns.example.com.
 ```
+
+## Acknowledgements
+
+I made this because I wanted to serve reverse DNS for my IPv6 subnet. The first
+option I tried was [AllKnowingDNS](https://all-knowing-dns.zekjur.net/), for
+which there is a package on my Debian system, but it failed with a Perl runtime
+error due to a missing method on some object. Rather than try to debug Perl
+code I took the opportunity to learn more about DNS and write my own.
+It was a very informative experience, and was quite straightforward thanks to
+Miek Gieben's excellent [dns package](https://github.com/miekg/dns).
 
 ## Copyright and License
 
