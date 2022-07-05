@@ -160,6 +160,9 @@ func (s *server) toAAAA(reply *dns.Msg, name string) {
 		return
 	}
 	x := m[1]
+	if strings.HasPrefix(x, "0") {
+		return
+	}
 	if pad := 32 - len(x) - len(s.prefix); pad > 0 {
 		x = strings.Repeat("0", pad) + x
 	}
