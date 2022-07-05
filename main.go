@@ -20,11 +20,21 @@ var (
 	domainFlag     = flag.String("domain", ".v6.example.com.", "domain suffix for generated domain name")
 	nsFlag         = flag.String("ns", "ns.example.com.", "name `server` for NS responses")
 	ttlFlag        = flag.Int("ttl", 3600, "answer TTL in `seconds`")
-	addrFlag       = flag.String("listen", ":dns", "DNS server listen `address`")
+	addrFlag       = flag.String("listen", ":53", "DNS server listen `address`")
 )
 
 func main() {
 	flag.Parse()
+
+	if !strings.HasSuffix(*domainFlag, ".") {
+		log.Fatal("bad -domain flag: must have trailing dot")
+	}
+	if !strings.HasPrefix(*domainFlag, ".") {
+		log.Fatal("bad -domain flag: must have leading dot")
+	}
+	if !strings.HasSuffix(*nsFlag, ".") {
+		log.Fatal("bad -ns flag: must have trailing dot")
+	}
 
 	_, network, err := net.ParseCIDR(*networkFlag)
 	if err != nil {
@@ -32,7 +42,7 @@ func main() {
 	}
 	ones, _ := network.Mask.Size()
 	if ones%8 != 0 {
-		log.Fatalf("bad -network flag: mask must be a multiple of 8")
+		log.Fatal("bad -network flag: mask must be a multiple of 8")
 	}
 	prefix := fmt.Sprintf("%x", []byte(network.IP[:ones/8]))
 
