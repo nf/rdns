@@ -1,12 +1,12 @@
 # rdns
 
-`rdns` is provides reverse DNS for IPv6 networks. It is a DNS server that
+`rdns` provides reverse DNS for IPv6 networks. It is a DNS server that
 serves PTR and AAAA records for an IPv6 subnet, and the corresponding
 authoritative NS records.
 
 ## Setup
 
-- Run `rdns` somewhere serving on port 53 (set flags appropriately).
+- Run `rdns` somewhere serving on port `53` (set flags appropriately).
 - Ask your upstream IPv6 provider to create an `ip6.arpa.` NS record for your
   subnet that points to your `rdns` instance.
 - Create an NS record for your subdomain (eg, `v6.example.com`) that also
@@ -33,7 +33,7 @@ authoritative NS records.
 
 ## Demo
 
-Here's a few dig queries against the server running with its default flags:
+Here are a few `dig` queries against `rdns` running with its default flags:
 
 ```
 $ dig -x fe80::f00d
@@ -75,4 +75,4 @@ Miek Gieben's excellent [dns package](https://github.com/miekg/dns).
 
 ## Copyright and License
 
-This code is Copyright 2022 Google Inc. and is [Apache 2.0 Licensed](LICENSE).
+This code is Copyright 2022 Google Inc. and is [Apache 2.0](LICENSE) licensed.
